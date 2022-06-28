@@ -1,3 +1,9 @@
+
+
+loadPage();
+
+
+
 function loadPage(){
     var loadDiv = document.createElement("div")
     loadDiv.setAttribute("class", "load-page")
@@ -7,13 +13,26 @@ function loadPage(){
     divHead.innerHTML = "Do you Want to Play a Game?"
 
     var divBtn = document.createElement("button")
+    divBtn.setAttribute("type", "button")
     divBtn.setAttribute("class", "load-page")
+    divBtn.setAttribute("id", "divBtn")
     divBtn.innerHTML = "Start Game"
 
     loadDiv.appendChild(divHead)
     loadDiv.appendChild(divBtn)
 
     document.body.appendChild(loadDiv)
+
+    document.getElementById("divBtn").addEventListener("click", clearLoad)
+    
 }
 
-loadPage();
+function clearLoad(){
+    this.parentNode.style.display='none';
+}
+
+
+
+
+
+
