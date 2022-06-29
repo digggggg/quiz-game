@@ -1,7 +1,8 @@
 
 
 loadPage();
-var score;
+var secondsLeft = 101;
+var score = 0;
 
 
 function loadPage(){
@@ -27,8 +28,30 @@ function loadPage(){
     
 }
 
+
+
+function gameTime(){
+    var timerDiv = document.createElement("div")
+        timerDiv.setAttribute("class", "timerdiv")
+        var timerlocation = document.createElement("h1")
+
+        timerDiv.appendChild(timerlocation)
+        document.body.appendChild(timerDiv)
+
+    var timerInterval = setInterval(function(){
+        secondsLeft--;
+        timerlocation.innerHTML = secondsLeft
+    
+        if (secondsLeft === 0){
+            clearInterval(timerInterval)
+        }
+    }, 1000);
+    
+}
+
 function clearLoad(){
     this.parentNode.style.display='none';
+    gameTime();
     loadFirstQuestion();
 }
 
@@ -38,6 +61,7 @@ function clearLoad2(){
 }
 
 function loadFirstQuestion(){
+
     var loadDiv = document.createElement("div")
     loadDiv.setAttribute("class", "question-one")
 
@@ -56,6 +80,7 @@ function loadFirstQuestion(){
     var loadInput = document.createElement("input")
     loadInput.setAttribute("id", "q1")
     loadInput.setAttribute("type", "radio")
+    loadInput.setAttribute("name", "question1")
 
     var loadLabel2 = document.createElement("label")
     loadLabel2.setAttribute("for", "q2")
@@ -64,27 +89,50 @@ function loadFirstQuestion(){
     var loadInput2 = document.createElement("input")
     loadInput2.setAttribute("id", "q2")
     loadInput2.setAttribute("type", "radio")
+    loadInput2.setAttribute("name", "question1")
+
+    var submitBtn = document.createElement("button")
+    submitBtn.setAttribute("type", "submit")
+    submitBtn.setAttribute("id", "submit")
+    submitBtn.innerHTML = "Submit"
 
     loadDiv.appendChild(loadHead)
     loadDiv.appendChild(loadQuestion)
     loadDiv.appendChild(loadForm)
     loadDiv.appendChild(loadLabel)
     loadDiv.appendChild(loadInput)
+    loadDiv.appendChild(loadLabel2)
+    loadDiv.appendChild(loadInput2)
+    loadDiv.appendChild(submitBtn)
 
     document.body.appendChild(loadDiv)
     
-    if (document.getElementById("loadInput").checked == true){
-        score++;
-    }
+    
 
-    clearLoad2();
+    
+    
+    document.getElementById('submit').addEventListener("click", function(){
 
+        if (document.getElementById("q1").checked == true){
+            score++;
+            return score;
+            
+        }
+        if (document.getElementById("q2").checked == true){
+            secondsLeft -= 10;
+            return score;
+        }
+        
+    })
+
+    document.getElementById('submit').addEventListener("click", clearLoad2)
     return score;
 }
 
 function loadSecondQuestion(){
     
 }
+
 
 
 

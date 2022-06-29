@@ -35,3 +35,15 @@
     margin: auto;
     text-align: center;
 }
+
+.timerdiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
