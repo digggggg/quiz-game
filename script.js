@@ -1,9 +1,9 @@
 
 
 loadPage();
-var secondsLeft = 10;
-
-
+var secondsLeft = 30;
+var score = 0;
+var timerInterval;
 function loadPage(){
     var loadDiv = document.createElement("div")
     loadDiv.setAttribute("class", "load-page")
@@ -47,6 +47,8 @@ function gameTime(){
             alert("You are out of time")
         }
     }, 1000);
+
+    return timerInterval = timerInterval;
     
 }
 
@@ -63,6 +65,7 @@ function clearLoad2(){
 
 function clearLoad3(){
     this.parentNode.style.display='none';
+    highscore();
 }
 
 function loadFirstQuestion(){
@@ -194,7 +197,7 @@ function highscore(){
 
     var submitBtn = document.createElement("button")
     submitBtn.setAttribute("type", "submit")
-    submitBtn.setAttribute("id", "submit1")
+    submitBtn.setAttribute("id", "submit2")
     submitBtn.innerHTML = "Submit"
 
     loadDiv.appendChild(loadForm)
@@ -203,9 +206,30 @@ function highscore(){
     loadDiv.appendChild(submitBtn)
 
     document.body.appendChild(loadDiv)
+
+    
+        var storedScore = loadInput.value()
+        
+        var myStoredScore = JSON.stringify(storedScore)
+        localStorage.setItem("score", myStoredScore)
+    
+
+    document.getElementById('submit2').addEventListener("click", function(){
+        clearInterval(timerInterval)
+    })
+    document.getElementById('submit2').addEventListener("click", saveScore)
+
     
 }
 
+function saveScore(){
+    this.parentNode.style.display='none';
+    var score = localStorage.getItem("score")
+   var myScore = JSON.parse(score)
+
+   var text = document.createElement('p')
+   text.innerHTML = myScore
+}
 
 
 
